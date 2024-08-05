@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<beans:bean id="tv" class="com.yedam.app.spring.TV"></beans:bean>
+	
+	<!--  DI : XML방식 -->				
+	<!-- <bean id="chef" class="com.yedam.app.xml.Chef" />
+	<bean class="com.yedam.app.xml.Restaurant">
+		생성자 인젝션
+		<constructor-arg ref="chef"/> constructor : 생성자, ref : 참조 -> bean의 id속성값
+		세터 인젝션
+		<property name="chef" ref="chef"/>
+	</bean> -->
+	
+	<!-- DI : 어노테이션 방식 -->
+	<!-- <context:component-scan base-package="com.yedam.app.aontation" /> --> <!-- com.yedam.app.aontation 하위class를 검색 -->
+	
+	<!-- DI : 자바 베이스 방식 -->
+	<context:component-scan base-package="com.yedam.app.javabase" /> <!-- com.yedam.app.aontation 하위class를 검색 -->
+	
+</beans>
