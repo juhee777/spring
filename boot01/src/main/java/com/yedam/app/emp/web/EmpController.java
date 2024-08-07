@@ -20,7 +20,7 @@ public class EmpController {
 	//해당 컨드롤러에 제공하는 서비스
 	private EmpService empService;
 	
-	@Autowired
+	@Autowired //@Autowired을 사용해서 String이 자동으로 의존성을 주입
 	public EmpController(EmpService empService) {
 		this.empService = empService;
 	}
@@ -34,7 +34,7 @@ public class EmpController {
 		// 1) 해당 기능 수행 => Service
 		List<EmpVO> list = empService.empList();
 		// 2) 클라이언트에 전달할 데이터 담기
-		model.addAttribute("emps", list); 
+		model.addAttribute("emps", list); //list가 "emps"라는 이름으로 모델객체에 저장, "emps"라는 이름으로 데이터에 접근할 수 있음
 		return "emp/list"; // 3) 데이터를 출력할 페이지 결정 emp/list(파일)
 		// classpath:/templates/  emp/list .html
 		// prdfix                 return    subfix
@@ -54,13 +54,13 @@ public class EmpController {
 	}
 	
 	// 등록 - 페이지 : GET
-	@GetMapping("empInsert")
+	@GetMapping("empInsert") //등록 폼을 보여주기 위한 GET 요청
 	public String empInsertForm() {
 		return "emp/insert";
 	}
 	
 	// 등록 - 처리 : POST => form태그를 통한 submit
-	@PostMapping("empInsert")
+	@PostMapping("empInsert") //실제 등록 처리를 위한 POST 요청
 	public String empInsertProcess(EmpVO empVO) {
 		int eid = empService.empInsert(empVO);
 		String url = null;

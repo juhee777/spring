@@ -59,7 +59,7 @@ public class ParamConteroller {
 	//Content-Type : application/json
 	@PostMapping("resbody")
 	@ResponseBody
-	public String requestBody(@RequestBody EmpVO empVO) {
+	public String requestBody(@RequestBody EmpVO empVO) { // 사용자가 보낸 JSON 데이터가 empVO 객체로 변환
 		String result = "Path : /resbody \n";
 		result += "\t employee_id : " + empVO.getEmployeeId();
 		result += "\t last_name : " + empVO.getLastName();
