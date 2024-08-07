@@ -17,7 +17,7 @@ public class ThymeleafController {
 	@GetMapping("thymeleaf")
 	public String thymeleafTest(Model model) {
 		EmpVO empVO = new EmpVO();
-		empVO.setEmployeeId(100);//df
+		empVO.setEmployeeId(100);//dfdfs
 		
 		EmpVO findVO = empService.empInfo(empVO);
 		model.addAttribute("empInfo", findVO);
