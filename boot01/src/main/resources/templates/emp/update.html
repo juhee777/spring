@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<form name="updateForm" th:object=${emp}><!-- th:object=${emp} 필드를 가리키는 표현식 -->
+		<h3>사원 정보 수정</h3>
+		<div>
+			<label for="eid">사원번호</label>
+			<input type="text"  th:field="*{employeeId}"  readonly><!-- th:field대신 th:value=${emp.employeeId}도 가능 -->
+		</div>
+		<div>
+			<label for="ename">이름</label>
+			<input type="text" th:field="*{lastName}" name="lastName">
+		</div>
+		<div>
+			<label for="email">이메일</label>
+			<input type="email" th:field="*{email}" name="email">
+		</div>
+		<div>
+			<label for="hDate">입사일</label>
+			<input type="date" th:field="*{hireDate}" name="hireDate">
+		</div>
+		<div>
+			<label for="job">업무</label>
+			<input type="text" th:field="*{jobId}" name="jobId">
+		</div>
+		<div>
+			<label for="sal">급여</label>
+			<input type="number" th:field="*{salary}" name="salary">
+		</div>
+		<div>
+			<button type="button" id="updateBtn">저장</button>
+		</div>
+	</form>
+	<script>
+		$('#updateBtn').on('click', updateAjax);
+		
+		function updateAjax(event){
+			// 1) 보낼 데이터 가져오기
+			let dateObj = getFormData();
+			// 2) AJAX
+			$.ajax('empUpdate',{
+				type : 'post', //method
+				contentType : 'application/json',
+				data : JSON.stringify(dateObj) //body
+				//data : dateObj //body
+				
+			})
+			.done(result => {
+				console.log(result);
+			})
+			.fail(err => console.log(err))
+		}
+		
+		function getFormData(){
+			let formAry = $('form[name="updateForm"]').serializeArray();
+			
+			let formObj = {};
+			$.each(formAry, function(idx, tag){
+				console.log(idx, tag);
+				console.log(tag.name + ' : ' + tag.value);
+				
+				formObj[tag.name] = tag.value;
+			})
+			console.clear();
+			console.log(formObj)
+			return formObj;
+		}
+	</script>
+</body>
+</html>

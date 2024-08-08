@@ -19,14 +19,6 @@ public class ParamConteroller {
 	//QueryString(질의문자열) : key=value&key=value&...
 	//Content-type : application/x-www-form-urlencode 
 	//Method : 상관없음
-	@RequestMapping("path/{id}") // path/Hong, path/1234
-	@ResponseBody
-	public String pathVariable(@PathVariable String id) { //PathVariable는 값이 누락되면 404
-		String result = "";
-		result += "path : /path/{id} \n";
-		result += "\t id : " + id;
-		return result;
-	}
 	
 	//QueryString => 커맨드 객체 (어노테이션 X) : 객체
 	@RequestMapping(path="comobj", method= {RequestMethod.GET, RequestMethod.POST})
@@ -43,7 +35,7 @@ public class ParamConteroller {
 	@ResponseBody
 	public String requestParam
 		    (@RequestParam Integer employeeId, //필수
-		    			   String lastName,    //생략가능
+		    			   String lastName,    //@RequestParam 없으면 생략가능
 		     @RequestParam(name="message", //파라미터 이름
 		    		 	   defaultValue="No message",
 		    		 	   required = true) String msg ) {
@@ -54,6 +46,19 @@ public class ParamConteroller {
 		result += "\t message : " + msg;
 		return result;
 	}
+	
+	// @PathVariable : 경로에 값을 포함하는 방식, 단일 값
+	// Method는 상관없음
+	// Content-type도 상관없음
+	@RequestMapping("path/{id}") // path/Hong, path/1234
+	@ResponseBody
+	public String pathVariable(@PathVariable String id) { //PathVariable는 값이 누락되면 404
+		String result = "";
+		result += "path : /path/{id} \n";
+		result += "\t id : " + id;
+		return result;
+	}
+	
 	//@RequestBody : JSON 포맷, 배열 or 객체
 	//Method : POST, PUT
 	//Content-Type : application/json

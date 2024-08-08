@@ -17,10 +17,10 @@ public class ThymeleafController {
 	@GetMapping("thymeleaf")
 	public String thymeleafTest(Model model) {
 		EmpVO empVO = new EmpVO();
-		empVO.setEmployeeId(100);//dfdfs
+		empVO.setEmployeeId(100);
 		
 		EmpVO findVO = empService.empInfo(empVO);
-		model.addAttribute("empInfo", findVO);
+		model.addAttribute("empInfo", findVO); 
 		return "test";
 	}
 }

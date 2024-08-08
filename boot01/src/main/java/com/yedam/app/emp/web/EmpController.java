@@ -29,7 +29,7 @@ public class EmpController {
 	// POST : 데이터 조작(등록, 수정, 삭제)
 	
 	// 전체조회 : GET
-	@GetMapping("empList") //Model = Request + Response  Response를 대신함
+	@GetMapping("empList") //Model = Request + Response
 	public String empList(Model model) {
 		// 1) 해당 기능 수행 => Service
 		List<EmpVO> list = empService.empList();
@@ -46,7 +46,7 @@ public class EmpController {
 		// 1) 해당 기능 수행 => Service
 		EmpVO findVO = empService.empInfo(empVO);
 		// 2) 클라이언트에 전달할 데이터 담기
-		model.addAttribute("emps", findVO); 
+		model.addAttribute("emp", findVO); 
 		return "emp/info"; // 3) 데이터를 출력할 페이지 결정 
 		// classpath:/templates/ emp/info .html
 		// prdfix                return    subfix
@@ -71,7 +71,7 @@ public class EmpController {
 			//등록되지 않은 경우
 			url = "redirect:empList";
 		}
-		return "";
+		return url;
 	}
 	
 	// 수정 - 페이지 : Get <=> 단건조회
@@ -83,14 +83,14 @@ public class EmpController {
 	}
 	
 	// 수정 - 처리 : AJAX => QueryString
-	@PostMapping("empUpdate")
+	//@PostMapping("empUpdate")
 	@ResponseBody
 	public Map<String, Object> empupdateAJAXQueryString(EmpVO empVO) {
 		return empService.empUdate(empVO);
 	}
 	
 	// 수정 - 처리 : AJAX => JSON
-	//@PostMapping("empUpdate")
+	@PostMapping("empUpdate")
 	@ResponseBody
 	public Map<String, Object> empupdateAJAXJSON(@RequestBody EmpVO empVO) {
 		return empService.empUdate(empVO);
