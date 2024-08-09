@@ -43,7 +43,7 @@ public class EmpServiceEmpl implements EmpService{
 	}
 
 	@Override
-	public Map<String, Object> empUdate(EmpVO empVO) {
+	public Map<String, Object> empUpdate(EmpVO empVO) {
 		
 		Map<String, Object> map = new HashMap<>(); //결과를 저장할 Map 객체를 생성
 		

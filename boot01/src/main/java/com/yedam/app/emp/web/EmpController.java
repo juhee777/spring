@@ -82,18 +82,18 @@ public class EmpController {
 		return "emp/update";
 	}
 	
-	// 수정 - 처리 : AJAX => QueryString
+	// 수정 - 처리 : AJAX => QueryString (java에서 기본적으로 하는 방식)
 	//@PostMapping("empUpdate")
 	@ResponseBody
 	public Map<String, Object> empupdateAJAXQueryString(EmpVO empVO) {
-		return empService.empUdate(empVO);
+		return empService.empUpdate(empVO);
 	}
 	
 	// 수정 - 처리 : AJAX => JSON
 	@PostMapping("empUpdate")
 	@ResponseBody
 	public Map<String, Object> empupdateAJAXJSON(@RequestBody EmpVO empVO) {
-		return empService.empUdate(empVO);
+		return empService.empUpdate(empVO);
 	}
 	
 	// 삭제 - 처리 : GET
