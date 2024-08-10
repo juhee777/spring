@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.dept.mapper.DeptMapper">
+	<select id="selectDeptAllList" resultType="DeptVO">
+		select department_id,
+			   department_name,
+			   manager_id,
+			   location_id
+	    from departments
+	    ORDER by department_id
+	</select>
+	
+	<select id="selectDeptInfo" resultType="DeptVO">
+		select department_id,
+			   department_name,
+			   manager_id,
+			   location_id
+	    from departments
+	    where department_id = #{departmentId}
+	</select>
+	
+	<insert id="insertDeptInfo" parameterType="DeptVO">
+		<selectKey keyProperty="departmentId" resultType="Integer" order="BEFORE"><!-- selectKey는 자동생성된 id값을 삽입하기 위해, BEFORE는 삽입 전에 키 값을 생성하는 것을 의미(실제 삽입 작업 전에 실행됨)-->
+		select NVL(max(department_id), 0) + 1 <!-- employees 테이블에서 가장 큰 employee_id 값을 가져와서 1을 더한 값을 반환합니다. 만약 employee_id가 존재하지 않는 경우 0이 반환되고 거기에 1을 더해 새로운 employee_id를 생성 -->
+		from departments
+		</selectKey>
+		insert into departments
+					(
+					   department_id,
+					   department_name,
+					   manager_id,
+					   location_id 
+					)
+			   values
+				   (
+				      #{departmentId},
+				      #{departmentName},
+				      #{managerId},
+				      #{locationId}
+				   )
+	</insert>
+	
+	<update id="updateDeptInfo">
+		update departments
+		set
+			 department_name = #{dept.departmentName},
+			 manager_id = #{dept.managerId},
+			 location_id = #{dept.locationId}
+			 
+		where department_id = #{id}
+	
+	</update>
+	
+	<delete id="deleteDeptInfo" parameterType="int">
+		delete from departments
+		where department_id = #{departmentId}
+	</delete>
+	
+</mapper>

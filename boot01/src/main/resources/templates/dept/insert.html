@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<form th:action="@{/deptInsert}" method="post" >
+		<h3>부서 정보 등록</h3>
+		<div>
+			<label for="dname">부서이름</label>
+			<input type="text" id="dname" name="departmentName">
+		</div>
+		<div>
+			<label for="manaId">관리자번호</label>
+			<input type="text" id="manaId" name="managerId">
+		</div>
+		<div>
+			<label for="locaId">위치번호</label>
+			<input type="text" id="locaId" name="locationId">
+		</div>
+		<div>
+			<button type="submit">등록</button>
+		</div>
+	</form>
+</body>
+</html>

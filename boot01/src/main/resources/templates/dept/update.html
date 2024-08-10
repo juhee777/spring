@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<form name="updateForm" th:object=${dept}><!-- th:object=${emp} 필드를 가리키는 표현식 -->
+		<h3>사원 정보 수정</h3>
+		<div>
+			<label for="did">부서번호</label>
+			<input type="text"  th:field="*{departmentId}"  readonly><!-- th:field대신 th:value=${emp.employeeId}도 가능 -->
+		</div>
+		<div>
+			<label for="dname">부서이름</label>
+			<input type="text" th:field="*{departmentName}" name="departmentName">
+		</div>
+		<div>
+			<label for="manaId">관리자번호</label>
+			<input type="text" th:field="*{managerId}" name="managerId">
+		</div>
+		<div>
+			<label for="locaId">위치번호</label>
+			<input type="text" th:field="*{locationId}" name="locationId">
+		</div>
+		<div>
+			<button type="button" id="updateBtn">저장</button>
+		</div>
+	</form>
+	<script>
+		$('#updateBtn').on('click', updateAjax);
+		
+		function updateAjax(event){
+			// 1) 보낼 데이터 가져오기
+			let dateObj = getFormData();
+			// 2) AJAX
+			$.ajax('deptUpdate',{
+				type : 'post', //method
+				data : dateObj //body
+				
+			})
+			.done(result => {
+				console.log(result);
+			})
+			.fail(err => console.log(err))
+		}
+		
+		function getFormData(){
+			let formAry = $('form[name="updateForm"]').serializeArray();
+			
+			let formObj = {};
+			$.each(formAry, function(idx, tag){
+				console.log(idx, tag);
+				console.log(tag.name + ' : ' + tag.value);
+				
+				formObj[tag.name] = tag.value;
+			})
+			console.clear();
+			console.log(formObj)
+			return formObj;
+		}
+	</script>
+</body>
+</html>

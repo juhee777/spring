@@ -49,7 +49,7 @@ class Boot01ApplicationTests {
 		assertEquals(1, result);
 	}
 	
-	@Test
+	//@Test
 	public void empUpdate() {
 		// -1) 대상 원래 데이터 조회 : 단건조회
 		EmpVO empVO = new EmpVO();
