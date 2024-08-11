@@ -34,9 +34,17 @@
 			   values
 				   (
 				      #{departmentId},
-				      #{departmentName},
-				      #{managerId},
-				      #{locationId}
+        			  #{departmentName},
+        			<choose>
+    					<when test="managerId != null and managerId != 0">
+       				 		 #{managerId}                <!-- managerId가 null이 아니고 0이 아닐 경우, managerId 변수의 값이 삽입 --> 
+    					</when>
+    				<otherwise>
+        					NULL                        <!-- managerId가 null이거나 0일 경우, NULL이 삽입 -->
+    				</otherwise>
+					</choose>
+        			  , 
+        			  #{locationId}
 				   )
 	</insert>
 	

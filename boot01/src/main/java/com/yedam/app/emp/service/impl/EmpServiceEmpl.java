@@ -56,7 +56,7 @@ public class EmpServiceEmpl implements EmpService{
 			isSuccessed = true;
 		}
 		
-		map.put("result", isSuccessed); //업데이트 성공 여부를 map에 저장
+		map.put("result", isSuccessed); //업데이트 성공 여부를 확인하기 위해 map에 저장
 		map.put("target", empVO); //업데이트된 직원 정보(empVO)를 map에 저장
 		
 		return map;

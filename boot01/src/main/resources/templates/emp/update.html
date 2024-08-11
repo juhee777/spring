@@ -54,13 +54,13 @@
 				//data : dateObj //body
 				
 			})
-			.done(result => {
+			.done(result => { //요청 성공 했을때 실행
 				console.log(result);
 			})
-			.fail(err => console.log(err))
+			.fail(err => console.log(err)) //요청 실패했을때 실행
 		}
 		
-		function getFormData(){
+		function getFormData(){ //폼 데이터를 객체 형태로 변환
 			let formAry = $('form[name="updateForm"]').serializeArray();
 			
 			let formObj = {};
