@@ -17,11 +17,11 @@ public class LoginUserVO implements UserDetails{
 	
 	private UserVO userVO;
 	
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() { //권한 extends(제한)
-		List<GrantedAuthority> auths = new ArrayList<>();
-		auths.add(new SimpleGrantedAuthority(userVO.getRoleName()));
-		return auths;
+	@Override       //GrantedAuthority 인터페이스를 구현한 어떤 타입이든 가능 /getAuthorities : 메서드 이름, 사용자의 권한 목록을 반환하는 역할
+	public Collection<? extends GrantedAuthority> getAuthorities() { //GrantedAuthority: 스프링 시큐리티에서 권한을 나타내는 인터페이스
+		List<GrantedAuthority> auths = new ArrayList<>(); //GrantedAuthority 객체들을 담을 수 있는 새로운 ArrayList를 생성
+		auths.add(new SimpleGrantedAuthority(userVO.getRoleName())); //새 SimpleGrantedAuthority 객체를 생성하고 리스트에 추가
+		return auths; //생성된 권한 목록을 반환
 	}
 
 	@Override
