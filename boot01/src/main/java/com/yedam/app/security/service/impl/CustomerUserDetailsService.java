@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.yedam.app.security.mapper.UserMapper;
 import com.yedam.app.security.service.LoginUserVO;
 import com.yedam.app.security.service.UserVO;
 
@@ -25,7 +26,7 @@ public class CustomerUserDetailsService implements UserDetailsService { //UserDe
 			throw new UsernameNotFoundException(username);
 		}
 		
-		return new LoginUserVO(userVO);
+		return new LoginUserVO(userVO); //검색이 되었으면 LoginUserVO형태로 변환
 	}
 
 }

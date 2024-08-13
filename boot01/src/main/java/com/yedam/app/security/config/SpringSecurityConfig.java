@@ -20,7 +20,7 @@ public class SpringSecurityConfig {
 	PasswordEncoder passwordEncoder() { 
 		return new BCryptPasswordEncoder();
 	}
-	/*
+	
 	//인증 및 인가
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //Security가 적용될 URI
@@ -28,7 +28,7 @@ public class SpringSecurityConfig {
 				-> authrize
 				.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() //permitAll 인증받지 않은 모든 대상 오픈
 				.requestMatchers("/", "/all").permitAll()
-				.requestMatchers("user/**").hasAnyRole("USER", "ADMIN")
+				.requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 				.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 				.anyRequest().authenticated() //anyRequest else
 				)
@@ -38,10 +38,11 @@ public class SpringSecurityConfig {
 						.logoutSuccessUrl("/all")
 						.invalidateHttpSession(true));
 		   
-		
+		http.csrf(csrf -> csrf.disable());
 		return http.build();
 	}
 	
+	/*
 	@Bean //메모리상 인증정보 등록 => 테스트 전용 방식
 	InMemoryUserDetailsManager inMemoryUserDetailsService() {
 		UserDetails user = User.builder()
