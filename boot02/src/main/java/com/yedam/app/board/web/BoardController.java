@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yedam.app.board.service.boardService;
+import com.yedam.app.board.service.BoardService;
 
 import jakarta.annotation.Resource;
 
@@ -24,10 +24,10 @@ import com.yedam.app.board.service.BoardVO;
 //@AllArgsConstructor
 public class BoardController {
 	
-	private boardService boardService;
+	private BoardService boardService;
 	
 	@Autowired
-	BoardController(boardService boardService) {
+	BoardController(BoardService boardService) {
 		this.boardService = boardService;
 	}
 	
@@ -43,7 +43,8 @@ public class BoardController {
 	
 	// 단건조회 : URI - boardInfo / PARAMETER - BoardVO(QueryString)
 	//          RETURN - board/boardInfo
-	@GetMapping("boardInfo")
+	@GetMapping("boardInfo") // 커맨드객체 : QueryString
+							 // ?bno=100
 	public String boardInfo(BoardVO boardVO, Model model) {
 		BoardVO findVO = boardService.boardInfo(boardVO);
 		model.addAttribute("board",findVO);
@@ -86,7 +87,7 @@ public class BoardController {
 		
 	// 삭제 - 처리 : URI - boardDelete / PARAMETER - Integer
 	//             RETURN - 전체조회 다시 호출
-	@GetMapping("boardDelete") // QueryString
+	@GetMapping("boardDelete") // QueryString : ?no=10
 	public String boardDelete(@RequestParam Integer no) { //@RequestParam가 생략가능 하나 명시하는 경우 파람 값이 반드시 있어야 함
 		boardService.deleteBoard(no);
 		return "redirect:boardList";

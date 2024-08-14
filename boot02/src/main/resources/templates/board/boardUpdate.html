@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{common/layouts/default_layout}"
+	  layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container text-center">
+      <form name="updateForm" th:object="${board}"><!--/* *{} */-->
+        <h3>게시글 수정</h3>
+        <table class="table">
+          <tr>
+            <th>번호</th>
+            <td><input class="form-control" type="text" th:field="*{bno}" readonly/></td>
+          </tr>
+           <tr>
+            <th>제목</th>
+            <td><input class="form-control" type="text" th:field="*{title}"/></td>
+          </tr>
+          <tr>
+            <th>작성자</th>
+            <td><input class="form-control" type="text" th:field="*{writer}" /></td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td><textarea class="form-control" th:field="*{contents}"></textarea></td>
+          </tr>
+          <tr>
+            <th>첨부파일</th>
+            <!-- 파일명 -->
+            <td><input class="form-control" type="text" th:field="*{image}" /></td>
+          </tr>
+        </table>
+        <button type="button" id="updateBtn">저장</button>
+      </form>
+    </div>
+    <script>
+    	$("#updateBtn").on("click", updateF)
+    	
+    	function updateF(e){
+    		//1) 보낼 데이터 확인
+    		let info = getBoardInfo();
+    		
+    		//2)
+    		$.ajax('boardUpdate', {
+    			type : 'post',
+    			contentType : 'application/json',
+    			data : JSON.stringify(info)
+    		})
+    		.done(data =>{
+    				if(data.result){
+    					alert('정상적으로 수정되었습니다.')
+    				}else{
+    					alert('수정되지 않았습니다. \n데이터를 확인해주세요')
+    				}
+    		})
+    		.fail(err => console.log(err))
+    	}
+    	
+    	function getBoardInfo(){
+    		let formData= $('form[name="updateForm"]').serializeArray();
+    		
+    		let objData = {};
+    		$.each(formData, function(ind, tag){
+    			objData[tag.name] = tag.value;
+    		})
+    		return objData;
+    	}
+    </script>
+</body>
+</html>

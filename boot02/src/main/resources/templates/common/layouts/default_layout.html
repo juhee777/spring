@@ -6,10 +6,10 @@
 <th:block th:replace="~{common/configs/default_configs :: ConfigFrag}"></th:block>
 </head>
 <body>
-	<header th:insert="~{common/fragments/default_header :: HeaderFrag">
+	<header th:insert="~{common/fragments/default_header :: HeaderFrag}">
 	</header>
 	<main>
-		<th:block layout:fragment="Content"></th:block>
+		<div layout:fragment="Content"></div>
 	</main>
 </body>
 </html>

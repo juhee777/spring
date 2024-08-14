@@ -66,6 +66,6 @@
 	<!-- 삭제 -->
 	<delete id="deleteBoardInfo" parameterType="int">
 		delete from board
-		whrer bno = #{boardNO}
+		where bno = #{boardNO}
 	</delete>
 </mapper>

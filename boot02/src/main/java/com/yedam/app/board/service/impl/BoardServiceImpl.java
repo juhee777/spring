@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.yedam.app.board.mapper.BoardMapper;
 import com.yedam.app.board.service.BoardVO;
-import com.yedam.app.board.service.boardService;
-
-public class BoardServiceImpl implements boardService{
+import com.yedam.app.board.service.BoardService;
+@Service
+public class BoardServiceImpl implements BoardService{
 	private BoardMapper boardMapper;
 	
 	@Autowired

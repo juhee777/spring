@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{common/layouts/default_layout}"
+	  layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container text-center">
+		<table>
+			<tr>
+				<th>번호</th>
+				<td>[[${board.bno}]]</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td>[[${board.title}]]</td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td>[[${board.writer}]]</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>[[${board.contents}]]</td>
+			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<!-- /images/cat.jpg -->                 <!--중첩표현식 쓸때는 괄호안에서 사용 -->
+				<td><img style="width:30%" th:src="@{/images/{fileName}(fileName=${board.image})}"></td>
+			</tr>
+			<tr>
+				<th>작성일자</th><!-- yyyy/MM/dd -->
+				<td>[[ ${#dates.format(board.regdate, 'yyyy/MM/dd')} ]]</td>
+			</tr>
+		</table>
+		<button type="button" th:onClick="|location.href='@{/boardUpdate(bno=${board.bno})}'|">수정</button>
+		<button type="button" th:onClick="|location.href='@{/boardList}'|">목록</button>
+		<button type="button" th:onClick="|location.href='@{/boardDelete(no=${board.bno})}'|">삭제</button>
+	</div>
+	<script>
+		
+	</script>
+</body>
+</html>
